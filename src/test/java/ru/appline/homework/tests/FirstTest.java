@@ -13,10 +13,13 @@ public class FirstTest extends BaseTest {
                 .changeValue("срок кредита", "30")
                 .changeValue("Стоимость недвижимости", "5180000")
                 .changeValue("Первоначальный взнос", "3058000")
-                //.switchOption("Страхование жизни и здоровья", false)
-                .checkField("cумма кредита", "212200220");
-//                .checkField("Ежемесячный платеж", "16922")
-//                .checkField("Необходимый доход", "21784")
-//                .checkField("Процентная ставка", "11");
+                .switchOption("скидка 0,3% при покупке квартиры на домклик", false)
+                .switchOption("Страхование жизни и здоровья", false)
+                .switchOption("молодая семья", true)
+                .switchOption("электронная регистрация сделки", false)
+                .checkField("cумма кредита", "2122000")
+                .checkField("Ежемесячный платеж", "16922")
+                .checkField("Необходимый доход", "21784")
+                .checkField("Процентная ставка", "11");
     }
 }

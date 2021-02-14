@@ -33,8 +33,12 @@ public class BasePage {
         PageFactory.initElements(getWebDriver(), this);
     }
 
+    String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+            + "var elementTop = arguments[0].getBoundingClientRect().top;"
+            + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+
     protected void scrollToElementJs(WebElement element) {
-        js.executeScript("arguments[0].scrollIntoView(false);", element);
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     protected WebElement elementToBeClickable(WebElement element) {
@@ -46,7 +50,7 @@ public class BasePage {
     }
 
     public void fillInputField(WebElement field, String value) {
-        scrollWithOffset(field, 0, -400);
+        scrollWithOffset(field, 0, 400);
         field.sendKeys(Keys.CONTROL + "a");
         field.sendKeys(value);
     }
@@ -62,20 +66,13 @@ public class BasePage {
 
     public void switchOption(WebElement option, boolean flag) {
         WebElement switcher = option.findElement(By.xpath("./../..//input"));
-        scrollWithOffset(switcher, 0, -400);
         if (Boolean.parseBoolean(switcher.getAttribute("aria-checked")) != flag) {
-            wait.until(ExpectedConditions.visibilityOf(switcher)).click();
+            switcher.click();
         }
-
+        DriverManager.getWebDriver().switchTo().parentFrame();
     }
 
     public void checkField(WebElement element, String value, String name) {
-        scrollWithOffset(element, 0, -400);
-        System.out.println(element.getAttribute("innerText"));
-        System.out.println(Parser.parse(element.getText()));
-        System.out.println(value);
-        //String elementInt = Parser.parseToInt(element.getAttribute("innerText"));
-       // int valueInt = Parser.parseToInt(value);
         Assertions.assertEquals(Parser.parse(element.getAttribute("innerText")),
                 value, "Не совпадает значения у показателя " + name);
     }

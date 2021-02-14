@@ -47,17 +47,18 @@ public class MortgagePage extends BasePage {
     @FindBy(xpath = "//span[text()='Ежемесячный платеж']/..//span[contains(@data-e2e-id, 'mland-calculator/mobile')]//span")
     WebElement monthlyPayment;
 
-    @FindBy(xpath = "//span[text()='Необходимый платеж']/..//span[contains(@data-e2e-id, 'mland-calculator/mobile')]//span")
+    @FindBy(xpath = "//span[text()='Необходимый доход']/..//span[contains(@data-e2e-id, 'mland-calculator/mobile')]//span")
     WebElement requiredIncome;
 
     @FindBy(xpath = "//span[text()='Процентная ставка']/..//span[contains(@data-e2e-id, 'mland-calculator/mobile')]//span")
     WebElement interestRate;
 
+    @FindBy(xpath = "//h2[contains(text(), 'Рассчитайте ипотеку')]")
+    WebElement calcHeader;
+
     @Step("Изменить значение {element} на {value}")
     public MortgagePage changeValue(String element, String value) {
         DriverManager.getWebDriver().switchTo().frame("iFrameResizer0");
-        //elementToBeClickable(closeButton);
-
         switch (element.toLowerCase()) {
             case ("цель кредита"):
                 chooseField(creditPurpose, dropDownList, value);
@@ -86,7 +87,7 @@ public class MortgagePage extends BasePage {
     public MortgagePage switchOption(String element, boolean flag) {
         DriverManager.getWebDriver().switchTo().frame("iFrameResizer0");
         switch (element.toLowerCase()) {
-            case ("скидка 0,3% при покупке квартиры на ДомКлик"):
+            case ("скидка 0,3% при покупке квартиры на домклик"):
                 switchOption(DomClick, flag);
                 break;
 
@@ -112,6 +113,7 @@ public class MortgagePage extends BasePage {
 
     @Step("Проверка поля {name}")
     public MortgagePage checkField(String name, String value) {
+        scrollToElementJs(calcHeader);
         DriverManager.getWebDriver().switchTo().frame("iFrameResizer0");
         switch (name.toLowerCase()) {
             case ("cумма кредита"):

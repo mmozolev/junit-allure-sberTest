@@ -2,6 +2,7 @@ package ru.appline.homework.pages;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -14,9 +15,15 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//a[contains(@class, 'kitt-top-menu__link_second')]")
     List<WebElement> menuSubList;
 
+    @FindBy(xpath = "//button[.='Закрыть']")
+    WebElement closeCookie;
+
 
     @Step("Выбрать в меню {name}")
     public StartPage selectMenu(String name) {
+        try {
+            closeCookie.click();
+        } catch (NoSuchElementException ignore){}
         for (WebElement element : menuList) {
             if (element.getText().equalsIgnoreCase(name)) {
                 elementToBeClickable(element).click();
