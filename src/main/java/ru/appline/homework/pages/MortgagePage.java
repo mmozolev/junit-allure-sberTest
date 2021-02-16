@@ -84,7 +84,7 @@ public class MortgagePage extends BasePage {
     }
 
     @Step("Переключение опции {element}")
-    public MortgagePage switchOption(String element, boolean flag) {
+    public MortgagePage switchOption(String element, String flag) {
         DriverManager.getWebDriver().switchTo().frame("iFrameResizer0");
         switch (element.toLowerCase()) {
             case ("скидка 0,3% при покупке квартиры на домклик"):
