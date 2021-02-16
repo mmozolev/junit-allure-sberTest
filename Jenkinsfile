@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Run Tests'){
             steps{
-                sh "/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/3.6.3/bin/mvn clean test -Dtest=\"${TESTNAME}\" -Dtype.browser=\"${TYPEBROWSER}\""
+                bat "C:/jenkins/tools/hudson.tasks.Maven_MavenInstallation/3.6.3/bin/mvn clean test -Dtest=\"${TESTNAME}\" -Dtype.browser=\"${TYPEBROWSER}\""
             }
         }
         stage('Allure Report Generation'){
