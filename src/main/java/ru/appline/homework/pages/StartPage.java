@@ -18,7 +18,6 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//button[.='Закрыть']")
     WebElement closeCookie;
 
-
     @Step("Выбрать в меню {name}")
     public StartPage selectMenu(String name) {
         try {
